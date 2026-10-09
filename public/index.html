@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#23483a">
+  <meta name="description" content="Sandyy Cafe serves feel-good burgers, crispy fries, and cool shakes. Find your new favorite and stop by today.">
+  <title>Sandyy Cafe — Good food. Good mood.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #23483a;
+      --primary-dark: #19372b;
+      --accent: #d1a84a;
+      --ink: #292822;
+      --cream: #f7f3e8;
+      --white: #fffefb;
+      --muted: #6f7068;
+      --line: #e5e0d3;
+      --sans: "DM Sans", Arial, sans-serif;
+      --display: "Oswald", Impact, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--white); font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1180px, calc(100% - 56px)); margin: 0 auto; }
+
+    .topbar { padding: 9px 20px; background: var(--accent); text-align: center; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .header { position: sticky; z-index: 10; top: 0; background: var(--white); box-shadow: 0 2px 12px rgb(0 0 0 / 7%); }
+    .nav { display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--primary); font: 700 28px/.9 var(--display); letter-spacing: .015em; }
+    .brand-mark { display: grid; width: 42px; height: 42px; place-items: center; border: 3px solid var(--primary); border-radius: 50%; font: 700 26px/.8 var(--display); letter-spacing: -.08em; }
+    .nav-links { display: flex; align-items: center; gap: 31px; }
+    .nav-links > a:not(.button) { font-size: 12px; font-weight: 800; }
+    .nav-links > a:not(.button):hover { color: var(--primary); }
+    .button { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; gap: 11px; padding: 0 21px; border: 0; border-radius: 999px; background: var(--primary); color: var(--white); cursor: pointer; font-size: 11px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; transition: transform .18s, background .18s; }
+    .button:hover { transform: translateY(-2px); background: var(--primary-dark); }
+    .button--yellow { background: var(--accent); color: var(--ink); }
+    .button--yellow:hover { background: #e1c779; }
+    .button--dark { background: var(--ink); }
+    .button--dark:hover { background: #000; }
+    .button-arrow { font-size: 17px; line-height: 1; }
+    .menu-toggle { display: none; width: 43px; height: 43px; border: 0; border-radius: 50%; background: var(--accent); cursor: pointer; font-size: 21px; }
+
+    .hero { position: relative; min-height: 570px; overflow: hidden; background: var(--primary); color: var(--white); }
+    .hero::before { position: absolute; top: -220px; right: -115px; width: 730px; height: 730px; border: 1px solid rgb(255 255 255 / 15%); border-radius: 50%; content: ""; }
+    .hero::after { position: absolute; top: -120px; right: -15px; width: 530px; height: 530px; border: 1px solid rgb(255 255 255 / 15%); border-radius: 50%; content: ""; }
+    .hero-inner { position: relative; z-index: 1; display: grid; min-height: 570px; grid-template-columns: 1fr 1fr; align-items: center; }
+    .hero-copy { position: relative; z-index: 2; padding: 65px 0 72px; }
+    .kicker { margin: 0 0 14px; color: var(--accent); font-size: 11px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
+    .hero h1 { max-width: 570px; margin: 0; font: 700 clamp(4.3rem, 9vw, 8rem)/.88 var(--display); letter-spacing: -.025em; text-transform: uppercase; }
+    .hero h1 span { display: block; color: var(--accent); }
+    .hero-copy > p:not(.kicker) { max-width: 385px; margin: 22px 0 27px; color: rgb(255 255 255 / 86%); font-size: 14px; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 11px; }
+    .hero-visual { position: relative; display: grid; min-height: 500px; place-items: center; }
+    .hero-food { width: min(600px, 115%); max-width: none; filter: drop-shadow(0 25px 25px rgb(60 0 0 / 35%)); transform: rotate(-7deg); }
+    .round-sticker { position: absolute; top: 74px; right: 12px; display: grid; width: 111px; height: 111px; place-items: center; border: 3px dashed var(--primary); border-radius: 50%; background: var(--accent); color: var(--ink); text-align: center; transform: rotate(11deg); }
+    .round-sticker strong { font: 700 23px/.95 var(--display); text-transform: uppercase; }
+    .round-sticker small { display: block; margin-top: 4px; font-size: 8px; font-weight: 900; letter-spacing: .1em; }
+    .ticker { overflow: hidden; padding: 12px 0; background: var(--accent); color: var(--ink); }
+    .ticker-track { display: flex; width: max-content; align-items: center; gap: 27px; animation: ticker 32s linear infinite; }
+    .ticker span { font: 600 15px var(--display); letter-spacing: .08em; text-transform: uppercase; }
+    .ticker b { color: var(--primary); font-size: 17px; }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    .section { padding: 90px 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 25px; margin-bottom: 32px; }
+    .eyebrow { margin: 0 0 10px; color: var(--primary); font-size: 10px; font-weight: 900; letter-spacing: .2em; text-transform: uppercase; }
+    .section-title { margin: 0; font: 700 clamp(2.6rem, 5vw, 4.5rem)/.98 var(--display); letter-spacing: -.025em; text-transform: uppercase; }
+    .section-note { max-width: 325px; margin: 0 0 3px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+    .filter-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 25px; }
+    .filter-button { min-height: 38px; padding: 0 16px; border: 1px solid var(--line); border-radius: 999px; background: var(--white); color: var(--ink); cursor: pointer; font-size: 10px; font-weight: 800; transition: .18s; }
+    .filter-button:hover, .filter-button[aria-pressed="true"] { border-color: var(--primary); background: var(--primary); color: var(--white); }
+    .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 17px; }
+    .menu-card { overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: var(--white); transition: transform .2s, box-shadow .2s; }
+    .menu-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgb(0 0 0 / 9%); }
+    .menu-card[hidden] { display: none; }
+    .menu-photo-wrap { position: relative; overflow: hidden; background: var(--cream); }
+    .menu-photo { width: 100%; aspect-ratio: 1.18; object-fit: cover; transition: transform .35s; }
+    .menu-card:hover .menu-photo { transform: scale(1.04); }
+    .food-tag { position: absolute; top: 11px; left: 11px; padding: 6px 9px; border-radius: 999px; background: var(--accent); font-size: 8px; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+    .menu-card-body { padding: 15px 15px 16px; }
+    .menu-card-title { display: flex; align-items: start; justify-content: space-between; gap: 9px; }
+    .menu-card h3 { margin: 0; font: 600 19px/1.1 var(--display); text-transform: uppercase; }
+    .price { flex-shrink: 0; color: var(--primary); font-size: 12px; font-weight: 900; }
+    .menu-card p { min-height: 38px; margin: 9px 0 14px; color: var(--muted); font-size: 10px; line-height: 1.7; }
+    .card-order { display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-size: 9px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .card-order:hover { color: var(--primary-dark); }
+
+    .deal-section { padding: 0 0 90px; }
+    .deal-card { position: relative; display: grid; min-height: 335px; grid-template-columns: 1.1fr .9fr; align-items: center; overflow: hidden; border-radius: 12px; background: var(--cream); }
+    .deal-copy { position: relative; z-index: 1; padding: 42px 0 42px 55px; }
+    .deal-copy .eyebrow { color: var(--primary); }
+    .deal-copy h2 { max-width: 500px; margin: 0; font: 700 clamp(3.3rem, 6vw, 6rem)/.9 var(--display); text-transform: uppercase; }
+    .deal-copy p { max-width: 350px; margin: 16px 0 21px; color: #53472b; font-size: 12px; line-height: 1.7; }
+    .deal-image { width: 115%; max-width: none; margin-left: -30px; filter: drop-shadow(0 20px 15px rgb(85 52 0 / 20%)); transform: rotate(-8deg); }
+    .deal-burst { position: absolute; top: 22px; right: 24px; display: grid; width: 76px; height: 76px; place-items: center; border-radius: 50%; background: var(--primary); color: var(--white); font: 600 19px/.9 var(--display); text-align: center; transform: rotate(10deg); }
+
+    .reasons { padding: 74px 0; background: var(--cream); }
+    .reason-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; text-align: center; }
+    .reason-icon { display: grid; width: 56px; height: 56px; margin: 0 auto 14px; place-items: center; border-radius: 50%; background: var(--accent); font-size: 25px; }
+    .reason h3 { margin: 0 0 7px; font: 600 22px var(--display); text-transform: uppercase; }
+    .reason p { max-width: 255px; margin: 0 auto; color: var(--muted); font-size: 11px; line-height: 1.7; }
+
+    .visit { padding: 90px 0; }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 65px; align-items: center; }
+    .visit-copy > p:not(.eyebrow) { max-width: 390px; margin: 17px 0 24px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+    .visit-info { display: grid; grid-template-columns: 90px 1fr; gap: 14px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 11px; }
+    .visit-info:last-of-type { border-bottom: 1px solid var(--line); margin-bottom: 22px; }
+    .visit-label { color: var(--muted); }
+    .visit-image { position: relative; min-height: 370px; overflow: hidden; border-radius: 9px; background: linear-gradient(0deg, rgb(0 0 0 / 25%), transparent 60%), url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1100&q=85") center / cover; }
+    .visit-sticker { position: absolute; right: 18px; bottom: 18px; padding: 11px 14px; border-radius: 6px; background: var(--accent); font-size: 10px; font-weight: 900; text-transform: uppercase; }
+
+    .app-banner { padding: 50px 0; background: var(--primary); color: var(--white); }
+    .app-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .app-inner .eyebrow { color: var(--accent); }
+    .app-inner h2 { max-width: 630px; margin: 0; font: 600 clamp(2.6rem, 5vw, 4.4rem)/.98 var(--display); text-transform: uppercase; }
+    .app-inner p:not(.eyebrow) { margin: 10px 0 0; color: rgb(255 255 255 / 83%); font-size: 11px; }
+    .footer { padding: 32px 0; background: #1b2923; color: var(--white); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer .brand { color: var(--accent); font-size: 24px; }
+    .footer .brand-mark { border-color: var(--accent); }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: 10px; font-weight: 700; }
+    .footer-links a:hover { color: var(--accent); }
+    .copyright { color: rgb(255 255 255 / 55%); font-size: 9px; }
+
+    @media (max-width: 900px) {
+      .menu-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-inner { grid-template-columns: 1.1fr .9fr; }
+      .hero-food { width: 130%; }
+      .round-sticker { right: -10px; }
+      .deal-copy { padding-left: 36px; }
+      .visit-grid { gap: 35px; }
+    }
+    @media (max-width: 650px) {
+      .wrap { width: min(100% - 36px, 500px); }
+      .topbar { font-size: 9px; }
+      .nav { min-height: 66px; }
+      .brand { font-size: 24px; }
+      .brand-mark { width: 36px; height: 36px; font-size: 22px; }
+      .menu-toggle { display: block; }
+      .nav-links { position: absolute; top: 66px; right: 0; left: 0; display: none; align-items: stretch; gap: 0; padding: 8px 20px 18px; background: var(--white); box-shadow: 0 12px 14px rgb(0 0 0 / 8%); }
+      .nav-links.is-open { display: flex; flex-direction: column; }
+      .nav-links > a:not(.button) { padding: 14px 3px; border-bottom: 1px solid var(--line); }
+      .nav-links .button { margin-top: 14px; }
+      .hero, .hero-inner { min-height: auto; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-copy { padding: 64px 0 0; }
+      .hero h1 { font-size: clamp(4.5rem, 19vw, 7rem); }
+      .hero-copy > p:not(.kicker) { max-width: 335px; font-size: 12px; }
+      .hero-visual { min-height: 260px; margin: -17px 0 7px; }
+      .hero-food { width: min(110%, 500px); }
+      .round-sticker { top: 3px; right: 2px; width: 86px; height: 86px; }
+      .round-sticker strong { font-size: 18px; }
+      .ticker { padding: 10px 0; }
+      .section { padding: 66px 0; }
+      .section-heading { align-items: start; flex-direction: column; gap: 13px; }
+      .section-note { max-width: 360px; }
+      .menu-grid { gap: 11px; }
+      .menu-photo { aspect-ratio: 1.1; }
+      .menu-card-body { padding: 12px; }
+      .menu-card h3 { font-size: 16px; }
+      .menu-card p { min-height: 52px; font-size: 9px; }
+      .food-tag { top: 7px; left: 7px; padding: 5px 7px; font-size: 7px; }
+      .deal-section { padding-bottom: 66px; }
+      .deal-card { grid-template-columns: 1fr; }
+      .deal-copy { padding: 32px 25px 0; }
+      .deal-copy h2 { font-size: clamp(3.5rem, 15vw, 5rem); }
+      .deal-image { width: 100%; margin: -4px auto 4px; }
+      .deal-burst { top: 14px; right: 14px; width: 64px; height: 64px; font-size: 16px; }
+      .reasons { padding: 60px 0; }
+      .reason-grid { grid-template-columns: 1fr; gap: 28px; }
+      .visit { padding: 66px 0; }
+      .visit-grid { grid-template-columns: 1fr; gap: 30px; }
+      .visit-image { min-height: 280px; }
+      .app-banner { padding: 40px 0; }
+      .app-inner { align-items: flex-start; flex-direction: column; gap: 19px; }
+      .footer-row { align-items: flex-start; flex-direction: column; gap: 17px; }
+      .footer-links { gap: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Good food. Good mood. Made fresh every day.</div>
+  <header class="header">
+    <nav class="nav wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Sandyy Cafe home"><span class="brand-mark" aria-hidden="true">S</span>SANDYY CAFE</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open navigation">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#menu">Our menu</a>
+        <a href="#deals">Hot deals</a>
+        <a href="#visit">Find us</a>
+        <a class="button" href="#menu">Order now <span class="button-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-inner wrap">
+        <div class="hero-copy">
+          <p class="kicker">The good stuff starts here</p>
+          <h1>Big bite.<span>Big smile.</span></h1>
+          <p>Juicy burgers, crispy fries, and thick shakes made for those can’t-stop-smiling kind of days.</p>
+          <div class="hero-actions">
+            <a class="button button--yellow" href="#menu">Explore the menu <span class="button-arrow" aria-hidden="true">→</span></a>
+            <a class="button button--dark" href="#deals">See what’s cooking</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img class="hero-food" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1200&q=90" alt="Sandyy Cafe double cheeseburger stacked with fresh toppings">
+          <div class="round-sticker"><strong>100%<small>BIG FLAVOR</small></strong></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Burgers, fries, shakes, and good times">
+      <div class="ticker-track" aria-hidden="true">
+        <span>Good food, good mood</span><b>✳</b><span>Burgers made for you</span><b>✳</b><span>Fresh fries always</span><b>✳</b><span>Bring your appetite</span><b>✳</b>
+        <span>Good food, good mood</span><b>✳</b><span>Burgers made for you</span><b>✳</b><span>Fresh fries always</span><b>✳</b><span>Bring your appetite</span><b>✳</b>
+      </div>
+    </div>
+
+    <section class="section" id="menu">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><p class="eyebrow">You’re gonna want a napkin</p><h2 class="section-title">Fan favorites</h2></div>
+          <p class="section-note">Made to order, packed with flavor, and always ready for the first bite. What sounds good?</p>
+        </div>
+        <div class="filter-list" role="group" aria-label="Filter menu items">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All the good stuff</button>
+          <button class="filter-button" type="button" data-filter="burgers" aria-pressed="false">Burgers</button>
+          <button class="filter-button" type="button" data-filter="sides" aria-pressed="false">Sides</button>
+          <button class="filter-button" type="button" data-filter="treats" aria-pressed="false">Treats</button>
+        </div>
+        <div class="menu-grid">
+          <article class="menu-card" data-category="burgers">
+            <div class="menu-photo-wrap"><img class="menu-photo" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=80" alt="Double cheeseburger with lettuce, tomato, and sauce" loading="lazy"><span class="food-tag">Fan favorite</span></div>
+            <div class="menu-card-body"><div class="menu-card-title"><h3>Double trouble</h3><span class="price">₹249</span></div><p>Two juicy patties, melty cheese, crisp lettuce, and our signature sauce.</p><a class="card-order" href="#visit">Make it yours <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="menu-card" data-category="burgers">
+            <div class="menu-photo-wrap"><img class="menu-photo" src="https://images.unsplash.com/photo-1553979459-d2229ba7433a?auto=format&fit=crop&w=700&q=80" alt="Classic burger with fresh lettuce and tomato" loading="lazy"><span class="food-tag">Classic</span></div>
+            <div class="menu-card-body"><div class="menu-card-title"><h3>The big bird</h3><span class="price">₹199</span></div><p>Our classic flame-grilled burger with pickles, onion, and tangy sauce.</p><a class="card-order" href="#visit">Make it yours <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="menu-card" data-category="sides">
+            <div class="menu-photo-wrap"><img class="menu-photo" src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=80" alt="Golden crispy french fries ready to share" loading="lazy"><span class="food-tag">Golden & crispy</span></div>
+            <div class="menu-card-body"><div class="menu-card-title"><h3>Happy fries</h3><span class="price">₹99</span></div><p>Hot, golden, perfectly seasoned fries. Go on, get the big size.</p><a class="card-order" href="#visit">Make it yours <span aria-hidden="true">→</span></a></div>
+          </article>
+          <article class="menu-card" data-category="treats">
+            <div class="menu-photo-wrap"><img class="menu-photo" src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=700&q=80" alt="Thick chocolate milkshake topped with cream" loading="lazy"><span class="food-tag">Cool treat</span></div>
+            <div class="menu-card-body"><div class="menu-card-title"><h3>Choco shake</h3><span class="price">₹129</span></div><p>Thick, creamy, chocolatey, and finished with a swirl of whipped cream.</p><a class="card-order" href="#visit">Make it yours <span aria-hidden="true">→</span></a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="deal-section" id="deals">
+      <div class="wrap">
+        <div class="deal-card">
+          <div class="deal-copy">
+            <p class="eyebrow">The gang’s all here</p>
+            <h2>Make it a meal.</h2>
+            <p>Your favorite burger, a pile of fries, and a cold drink. The combo that just makes sense.</p>
+            <a class="button button--dark" href="#menu">Build your combo <span class="button-arrow" aria-hidden="true">→</span></a>
+          </div>
+          <img class="deal-image" src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=1000&q=85" alt="A satisfying burger and fries combo" loading="lazy">
+          <span class="deal-burst" aria-label="Made fresh">Made<br>fresh!</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="reasons">
+      <div class="reason-grid wrap">
+        <article class="reason"><div class="reason-icon" aria-hidden="true">🍔</div><h3>Made just right</h3><p>Every burger is cooked to order and built with the good stuff.</p></article>
+        <article class="reason"><div class="reason-icon" aria-hidden="true">🍟</div><h3>Fresh, never fussy</h3><p>Simple ingredients, big flavor, and a whole lot of happy.</p></article>
+        <article class="reason"><div class="reason-icon" aria-hidden="true">😊</div><h3>Good times included</h3><p>Bring your people, bring your appetite. We’ll take it from here.</p></article>
+      </div>
+    </section>
+
+    <section class="visit" id="visit">
+      <div class="visit-grid wrap">
+        <div class="visit-copy">
+          <p class="eyebrow">Come hungry, leave happy</p>
+          <h2 class="section-title">Your table’s waiting.</h2>
+          <p>Ready for a bite? Open our Google Maps pin below to see Sandyy Cafe’s exact location and plan your visit.</p>
+          <div class="visit-info"><span class="visit-label">Location</span><a href="https://maps.app.goo.gl/T35AsEo2VEbRprYP7?g_st=ic" target="_blank" rel="noreferrer">Open Sandyy Cafe’s location in Google Maps ↗</a></div>
+          <a class="button" href="https://maps.app.goo.gl/T35AsEo2VEbRprYP7?g_st=ic" target="_blank" rel="noreferrer">Get directions <span class="button-arrow" aria-hidden="true">→</span></a>
+        </div>
+        <div class="visit-image" role="img" aria-label="Welcoming restaurant interior with tables for friends and family"><span class="visit-sticker">Pull up a chair!</span></div>
+      </div>
+    </section>
+
+    <section class="app-banner">
+      <div class="app-inner wrap">
+        <div><p class="eyebrow">Save room for good things</p><h2>Make today a little more delicious.</h2><p>Check out the menu and come see us. Your next favorite is waiting.</p></div>
+        <a class="button button--yellow" href="#menu">See the menu <span class="button-arrow" aria-hidden="true">→</span></a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-row wrap">
+      <a class="brand" href="#home"><span class="brand-mark" aria-hidden="true">S</span>SANDYY CAFE</a>
+      <div class="footer-links"><a href="#menu">Menu</a><a href="#deals">Hot deals</a><a href="#visit">Find us</a></div>
+      <span class="copyright">© <span id="year"></span> Sandyy Cafe. Good food, good mood.</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", String(!isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Open navigation" : "Close navigation");
+      navLinks.classList.toggle("is-open", !isOpen);
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open navigation");
+        navLinks.classList.remove("is-open");
+      });
+    });
+
+    document.querySelectorAll(".filter-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const category = button.dataset.filter;
+        document.querySelectorAll(".filter-button").forEach((filter) => {
+          filter.setAttribute("aria-pressed", String(filter === button));
+        });
+        document.querySelectorAll(".menu-card").forEach((card) => {
+          card.hidden = category !== "all" && card.dataset.category !== category;
+        });
+      });
+    });
+
+    document.querySelector("#year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
