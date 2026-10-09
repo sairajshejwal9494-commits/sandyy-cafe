@@ -2,6 +2,10 @@
 
 A responsive restaurant website for Sandyy Cafe, featuring the menu, rupee prices, location directions, and mobile navigation.
 
+## Live website
+
+[Visit Sandyy Cafe](https://sairajshejwal9494-commits.github.io/sandyy-cafe/)
+
 ## Run locally
 
 ```sh
